@@ -17,12 +17,12 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
     offset: ["start start", "end start"],
   })
 
-  const fadeOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0, 1])
+  const fadeOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-theme-black"
+      className="relative h-[250vh] w-full bg-theme-black"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <Navbar isFixed={false} />
@@ -47,13 +47,13 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
         {/* scroll-triggered dark gradient */}
         <motion.div
           style={{ opacity: fadeOpacity }}
-          className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/40 to-transparent z-10"
+          className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10"
         />
 
         {/* scroll-triggered text content */}
         <motion.div
           style={{ opacity: fadeOpacity }}
-          className="absolute bottom-12 left-6 md:left-12 z-20 max-w-4xl"
+          className="absolute bottom-32 left-6 md:left-12 z-20 max-w-4xl"
         >
           <h1 className="h1-title text-theme-yellow mb-2">{title}</h1>
           <h2 className="h2-subtitle text-theme-white">{subtitle}</h2>
