@@ -60,8 +60,8 @@ export default function Home() {
     <main className="min-h-screen bg-offblack selection:bg-theme-yellow selection:text-offblack">
       <Hero
         src="/images/placeholder-landscape.jpg"
-        title="The Lives of Bukidnon Farmers"
-        subtitle="Amid Changing Climates"
+        title="Title"
+        subtitle="Subtitle"
       />
 
       <LanguageToggle />
