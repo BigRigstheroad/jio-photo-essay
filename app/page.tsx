@@ -9,7 +9,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "intro-text",
-    content: "Intro text",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.",
   },
   {
     type: "author-photo",
@@ -41,7 +42,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "body-text-1",
-    content: "Body text.",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.",
   },
   {
     type: "scroll-overlay",
