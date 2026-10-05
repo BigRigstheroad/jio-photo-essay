@@ -48,7 +48,7 @@ const essayContent = [
   {
     type: "scroll-overlay",
     id: "overlay-1",
-    clientImg: "/images/placeholder-landscape.jpg",
+    authorImg: "/images/placeholder-landscape.jpg",
     participantImg: "/images/placeholder-landscape.jpg",
     participantCopyright: "Participant Name",
     participantCaption: '"Participant caption."',
@@ -124,7 +124,7 @@ export default function Home() {
             return (
               <ScrollOverlay
                 key={block.id}
-                clientImg={block.clientImg!}
+                authorImg={block.authorImg!}
                 participantImg={block.participantImg!}
                 participantCopyright={block.participantCopyright!}
                 participantCaption={block.participantCaption!}

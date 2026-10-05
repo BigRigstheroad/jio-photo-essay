@@ -4,7 +4,7 @@ import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 interface ScrollOverlayProps {
-  clientImg: string
+  authorImg: string
   participantImg: string
   participantCopyright: string
   participantCaption: string
@@ -13,7 +13,7 @@ interface ScrollOverlayProps {
 }
 
 export default function ScrollOverlay({
-  clientImg,
+  authorImg,
   participantImg,
   participantCopyright,
   participantCaption,
@@ -26,33 +26,39 @@ export default function ScrollOverlay({
     offset: ["start start", "end end"],
   })
 
-  // slide the participant photo up from below the viewport to the center
-  const yOffset = useTransform(scrollYProgress, [0.3, 1], ["100vh", "0vh"])
+  const yOffset = useTransform(scrollYProgress, [0.2, 0.5], ["100vh", "0vh"])
+
+  const bgDarkenOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.5])
 
   return (
     <div
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-theme-black my-20"
+      className="relative h-[250vh] w-full bg-theme-black my-20"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* background base img */}
+        {/* jio's img */}
         <Image
-          src={clientImg}
-          alt="Author's perspective background"
+          src={authorImg}
+          alt="Alt text"
           fill
-          className="object-cover brightness-50"
+          className="object-cover"
           sizes="100vw"
         />
 
-        {/* participant image sliding up */}
+        <motion.div
+          style={{ opacity: bgDarkenOpacity }}
+          className="absolute inset-0 bg-black z-0"
+        />
+
+        {/* participant overlay img */}
         <motion.div
           style={{ y: yOffset }}
           className="relative z-10 max-w-lg w-full px-4"
         >
-          <div className="bg-offwhite p-4 pb-10 w-full shadow-2xl">
+          <div className="bg-offwhite pb-6 w-full shadow-2xl">
             <Image
               src={participantImg}
-              alt="Participant's perspective overlay"
+              alt="Participant's image"
               width={participantWidth}
               height={participantHeight}
               className="w-full h-auto object-cover max-h-[60vh]"

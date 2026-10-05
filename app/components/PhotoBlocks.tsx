@@ -54,7 +54,7 @@ export function ParticipantPhoto({
   return (
     <div className="max-w-3xl mx-auto w-full flex flex-col items-center my-20 px-4">
       {/* offwhite frame */}
-      <div className="bg-offwhite p-4 pb-10 w-full shadow-2xl">
+      <div className="bg-offwhite pb-6 w-full shadow-2xl">
         <Image
           src={src}
           alt={alt}

@@ -15,12 +15,12 @@ export default function ScrollCrossfade({ images }: ScrollCrossfadeProps) {
   })
 
   // fade the second image in between 20% and 80% of the scroll depth
-  const image2Opacity = useTransform(scrollYProgress, [0.2, 0.8], [0, 1])
+  const image2Opacity = useTransform(scrollYProgress, [0.1, 0.6], [0, 1])
 
   return (
     <div
       ref={containerRef}
-      className="relative h-[200vh] w-full my-20 bg-theme-black"
+      className="relative h-[250vh] w-full my-20 bg-theme-black"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* base img */}
