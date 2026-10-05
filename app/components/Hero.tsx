@@ -1,25 +1,22 @@
 "use client"
 import { useRef } from "react"
+import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Navbar from "./Navbar"
 
-export default function Hero({
-  src,
-  title,
-  subtitle,
-}: {
+interface HeroProps {
   src: string
   title: string
   subtitle: string
-}) {
+}
+
+export default function Hero({ src, title, subtitle }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  // map scroll progress (0 to 1) to opacity (0 to 1)
-  // text and gradient start fading in after scrolling 30% of the hero container
   const fadeOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0, 1])
 
   return (
@@ -30,15 +27,22 @@ export default function Hero({
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <Navbar isFixed={false} />
 
-        {/* initial hero image (fades in from black on initial page load) */}
-        <motion.img
+        {/* initial hero img */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={src}
-          alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        />
+          className="absolute inset-0 w-full h-full z-0"
+        >
+          <Image
+            src={src}
+            alt="Hero background"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </motion.div>
 
         {/* scroll-triggered dark gradient */}
         <motion.div
