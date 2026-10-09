@@ -31,7 +31,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 3, ease: "easeOut" }}
           className="absolute inset-0 w-full h-full z-0"
         >
           <Image
@@ -56,7 +56,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
           className="absolute bottom-32 left-6 md:left-12 z-20 max-w-4xl"
         >
           <h1 className="h1-title text-theme-yellow mb-2">{title}</h1>
-          <h2 className="h2-subtitle text-theme-white">{subtitle}</h2>
+          <h2 className="h2-subtitle text-theme-yellow">{subtitle}</h2>
         </motion.div>
       </div>
     </section>

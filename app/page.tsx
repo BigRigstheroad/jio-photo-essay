@@ -24,7 +24,7 @@ const essayContent = [
   {
     type: "participant-photo",
     id: "img-2",
-    src: "/images/placeholder-landscape.jpg",
+    src: "/images/placeholder-landscape-2.jpg",
     alt: "Alt text",
     copyright: "Participant Name",
     caption: '"Participant caption."',
@@ -38,6 +38,7 @@ const essayContent = [
       "/images/placeholder-landscape.jpg",
       "/images/placeholder-landscape-2.jpg",
     ],
+    caption: "CAPTION. Lorem ipsum dolor sit amet consectetur adipiscing elit.",
   },
   {
     type: "text-block",
@@ -49,7 +50,7 @@ const essayContent = [
     type: "scroll-overlay",
     id: "overlay-1",
     authorImg: "/images/placeholder-landscape.jpg",
-    participantImg: "/images/placeholder-landscape.jpg",
+    participantImg: "/images/placeholder-landscape-2.jpg",
     participantCopyright: "Participant Name",
     participantCaption: '"Participant caption."',
     participantWidth: 1080,
@@ -62,7 +63,7 @@ export default function Home() {
     <main className="min-h-screen bg-offblack selection:bg-theme-yellow selection:text-offblack">
       <Hero
         src="/images/placeholder-landscape.jpg"
-        title="Title"
+        title="TITLE"
         subtitle="Subtitle"
       />
 
@@ -116,6 +117,7 @@ export default function Home() {
               <ScrollCrossfade
                 key={block.id}
                 images={block.images!}
+                caption={block.caption!}
               />
             )
           }
