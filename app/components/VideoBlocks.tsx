@@ -12,6 +12,7 @@ export default function VideoBlocks({
         controls
         preload="metadata"
         playsInline
+        muted
         className="w-full aspect-video bg-black shadow-lg"
       />
       {caption && (

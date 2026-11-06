@@ -4,21 +4,20 @@ import Image from "next/image"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 
 interface ScrollVideoOverlayProps {
-  clientImg: string
+  authorImg: string
   participantVideoSrc: string
   participantCopyright: string
   participantCaption: string
 }
 
 export default function ScrollVideoOverlay({
-  clientImg,
+  authorImg,
   participantVideoSrc,
   participantCopyright,
   participantCaption,
 }: ScrollVideoOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // 1. The Scroll Animation Logic
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -35,7 +34,6 @@ export default function ScrollVideoOverlay({
   useEffect(() => {
     if (isInView) {
       videoRef.current?.play().catch(() => {
-        // prevents errors if browser blocks autoplay
         console.log("Autoplay blocked by browser")
       })
     } else {
@@ -50,7 +48,7 @@ export default function ScrollVideoOverlay({
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         <Image
-          src={clientImg}
+          src={authorImg}
           alt="Author's perspective background"
           fill
           className="object-cover"
@@ -76,11 +74,12 @@ export default function ScrollVideoOverlay({
                 controls
                 playsInline
                 loop
+                muted
                 className="w-full h-full object-cover"
               />
             </div>
 
-            <div className="pt-6 pb-10 px-4 w-full">
+            <div className="pt-6 pb-6 px-4 w-full">
               <p className="font-libre text-[14px] text-offblack text-center">
                 © {participantCopyright}
               </p>

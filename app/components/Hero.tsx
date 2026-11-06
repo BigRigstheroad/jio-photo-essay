@@ -17,7 +17,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
     offset: ["start start", "end start"],
   })
 
-  const fadeOpacity = useTransform(scrollYProgress, [0.1, 0.5], [0, 1])
+  const fadeOpacity = useTransform(scrollYProgress, [0.02, 0.15], [0, 1])
 
   return (
     <section

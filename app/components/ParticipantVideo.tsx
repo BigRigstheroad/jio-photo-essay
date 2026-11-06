@@ -1,3 +1,4 @@
+"use client"
 import { useRef, useEffect } from "react"
 import { useInView } from "framer-motion"
 
@@ -39,11 +40,12 @@ export function ParticipantVideo({
             controls
             playsInline
             loop
+            muted
             className="w-full h-full object-cover"
           />
         </div>
 
-        <div className="pt-6 pb-10 px-4 w-full">
+        <div className="pt-6 pb-6 px-4 w-full">
           <p className="font-libre text-[14px] text-offblack text-center">
             © {copyright}
           </p>

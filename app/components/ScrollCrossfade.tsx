@@ -16,10 +16,6 @@ function FadeLayer({
 }) {
   const step = 1 / (total - 1)
 
-  // THE LEVER: Changed 0.1 to 0.35
-  // This creates a massive pause where the opacity doesn't change at all.
-  // The user scrolls a lot before startFade triggers, and it hits 100% opacity
-  // well before the endFade boundary.
   const startFade = (index - 1) * step + step * 0.35
   const endFade = index * step - step * 0.35
 
@@ -44,11 +40,13 @@ function FadeLayer({
 interface ScrollCrossfadeProps {
   images: string[]
   caption: string
+  showLabel?: boolean
 }
 
 export default function ScrollCrossfade({
   images,
   caption,
+  showLabel = false,
 }: ScrollCrossfadeProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -56,8 +54,6 @@ export default function ScrollCrossfade({
     offset: ["start start", "end end"],
   })
 
-  // THE HEIGHT: Increased from 150vh to 200vh per image
-  // This adds more physical scrolling distance to compensate for the longer "holds"
   const dynamicHeight = `${images.length * 200}vh`
 
   return (
@@ -91,9 +87,11 @@ export default function ScrollCrossfade({
 
         {/* persistent text content */}
         <div className="absolute bottom-32 left-6 md:left-12 z-30 max-w-3xl">
-          <p className="font-montserrat text-xs md:text-sm font-semibold uppercase tracking-widest text-theme-yellow mb-2 drop-shadow-md">
-            Interactive - scrollable
-          </p>
+          {showLabel && (
+            <p className="font-montserrat text-xs md:text-sm font-semibold uppercase tracking-widest text-theme-yellow mb-2 drop-shadow-md">
+              Interactive - scrollable
+            </p>
+          )}
           <p className="font-libre text-2xl italic text-theme-white drop-shadow-md">
             {caption}
           </p>
