@@ -14,9 +14,7 @@ export default function AuthorFullWidth({
 }: AuthorFullWidthProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // still use useScroll to make the section sticky (h-[200vh])
-  // so it has the same pacing as the other interactive blocks
-  const { scrollYProgress } = useScroll({
+  useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   })
