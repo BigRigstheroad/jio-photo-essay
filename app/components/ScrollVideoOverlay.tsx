@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion"
 
 interface ScrollVideoOverlayProps {
   authorImg1: string
-  authorImg2: string
+  authorImg2?: string
   participantVideoSrc: string
   participantCopyright: string
   participantCaption: string
@@ -55,7 +55,6 @@ export default function ScrollVideoOverlay({
       className="relative h-[400vh] w-full bg-theme-black my-20"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Base Layer 1 */}
         <Image
           src={authorImg1}
           alt="Author's perspective background 1"
@@ -64,19 +63,20 @@ export default function ScrollVideoOverlay({
           sizes="100vw"
         />
 
-        {/* Base Layer 2 */}
-        <motion.div
-          style={{ opacity: img2Opacity }}
-          className="absolute inset-0 z-0"
-        >
-          <Image
-            src={authorImg2}
-            alt="Author's perspective background 2"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-        </motion.div>
+        {authorImg2 && (
+          <motion.div
+            style={{ opacity: img2Opacity }}
+            className="absolute inset-0 z-0"
+          >
+            <Image
+              src={authorImg2}
+              alt="Author's perspective background 2"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </motion.div>
+        )}
 
         <motion.div
           style={{ opacity: bgDarkenOpacity }}
@@ -89,7 +89,7 @@ export default function ScrollVideoOverlay({
           className="relative z-10 max-w-lg w-full px-4"
         >
           <div className="bg-offwhite w-full shadow-2xl flex flex-col">
-            <div className="relative w-full aspect-[3/4] bg-black">
+            <div className="relative w-full aspect-3/4 bg-black">
               <video
                 ref={videoRef}
                 src={participantVideoSrc}
