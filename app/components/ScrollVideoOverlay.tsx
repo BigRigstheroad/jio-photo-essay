@@ -4,14 +4,16 @@ import Image from "next/image"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 
 interface ScrollVideoOverlayProps {
-  authorImg: string
+  authorImg1: string
+  authorImg2: string
   participantVideoSrc: string
   participantCopyright: string
   participantCaption: string
 }
 
 export default function ScrollVideoOverlay({
-  authorImg,
+  authorImg1,
+  authorImg2,
   participantVideoSrc,
   participantCopyright,
   participantCaption,
@@ -23,19 +25,25 @@ export default function ScrollVideoOverlay({
     offset: ["start start", "end end"],
   })
 
-  const yOffset = useTransform(scrollYProgress, [0.2, 0.6], ["100vh", "0vh"])
-  const bgDarkenOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 0.5])
+  const yOffset = useTransform(
+    scrollYProgress,
+    [0.2, 0.4, 0.7, 0.9],
+    ["100vh", "0vh", "0vh", "-100vh"],
+  )
+  const bgDarkenOpacity = useTransform(
+    scrollYProgress,
+    [0.2, 0.4, 0.7, 0.9],
+    [0, 0.5, 0.5, 0],
+  )
+  const img2Opacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1])
 
   const videoCardRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-
   const isInView = useInView(videoCardRef, { margin: "-40% 0px -40% 0px" })
 
   useEffect(() => {
     if (isInView) {
-      videoRef.current?.play().catch(() => {
-        console.log("Autoplay blocked by browser")
-      })
+      videoRef.current?.play().catch(() => {})
     } else {
       videoRef.current?.pause()
     }
@@ -44,16 +52,31 @@ export default function ScrollVideoOverlay({
   return (
     <div
       ref={containerRef}
-      className="relative h-[300vh] w-full bg-theme-black my-20"
+      className="relative h-[400vh] w-full bg-theme-black my-20"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Base Layer 1 */}
         <Image
-          src={authorImg}
-          alt="Author's perspective background"
+          src={authorImg1}
+          alt="Author's perspective background 1"
           fill
           className="object-cover"
           sizes="100vw"
         />
+
+        {/* Base Layer 2 */}
+        <motion.div
+          style={{ opacity: img2Opacity }}
+          className="absolute inset-0 z-0"
+        >
+          <Image
+            src={authorImg2}
+            alt="Author's perspective background 2"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </motion.div>
 
         <motion.div
           style={{ opacity: bgDarkenOpacity }}
@@ -66,7 +89,7 @@ export default function ScrollVideoOverlay({
           className="relative z-10 max-w-lg w-full px-4"
         >
           <div className="bg-offwhite w-full shadow-2xl flex flex-col">
-            <div className="relative w-full aspect-3/4 bg-black">
+            <div className="relative w-full aspect-[3/4] bg-black">
               <video
                 ref={videoRef}
                 src={participantVideoSrc}
@@ -78,14 +101,12 @@ export default function ScrollVideoOverlay({
                 className="w-full h-full object-cover"
               />
             </div>
-
-            <div className="pt-6 pb-6 px-4 w-full">
+            <div className="pt-6 pb-10 px-4 w-full">
               <p className="font-libre text-[14px] text-offblack text-center">
                 © {participantCopyright}
               </p>
             </div>
           </div>
-
           <p className="caption-text text-theme-white mt-6 text-center shadow-black drop-shadow-md">
             {participantCaption}
           </p>
