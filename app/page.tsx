@@ -12,7 +12,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq1-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-full-width",
@@ -23,7 +24,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq1-text-2",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-photo",
@@ -45,7 +47,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq2-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-full-width",
@@ -71,7 +74,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq3-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-full-width",
@@ -89,13 +93,20 @@ const essayContent = [
       "/images/12.jpg",
       "/images/13.jpg",
     ],
-    caption: "[5-Image Crossfade Sequence - 9.jpg through 13.jpg]",
+    captions: [
+      "[Caption for 9.jpg]",
+      "[Caption for 10.jpg]",
+      "[Caption for 11.jpg]",
+      "[Caption for 12.jpg]",
+      "[Caption for 13.jpg]",
+    ],
     showLabel: true,
   },
   {
     type: "text-block",
     id: "seq4-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "participant-video",
@@ -125,7 +136,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq5-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "scroll-video-overlay",
@@ -140,7 +152,8 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq6-text",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "scroll-crossfade",
@@ -152,7 +165,13 @@ const essayContent = [
       "/images/24.jpg",
       "/images/25.jpg",
     ],
-    caption: "[Final 5-Image Crossfade Sequence - 21.jpg through 25.jpg]",
+    captions: [
+      "[Caption for 21.jpg]",
+      "[Caption for 22.jpg]",
+      "[Caption for 23.jpg]",
+      "[Caption for 24.jpg]",
+      "[Caption for 25.jpg]",
+    ],
     showLabel: false,
   },
 ]
@@ -163,7 +182,7 @@ export default function Home() {
       <Hero
         src="/images/1.jpg"
         title="TITLE"
-        subtitle="Visual-Led Sequence Test"
+        subtitle="test demonstration"
       />
 
       <LanguageToggle />
@@ -235,7 +254,7 @@ export default function Home() {
               <ScrollCrossfade
                 key={block.id}
                 images={block.images!}
-                caption={block.caption!}
+                captions={block.captions!}
                 showLabel={block.showLabel}
               />
             )
