@@ -12,7 +12,7 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq1-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "author-full-width",
@@ -23,7 +23,7 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq1-text-2",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "author-photo",
@@ -45,7 +45,7 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq2-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "author-full-width",
@@ -71,7 +71,7 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq3-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "author-full-width",
@@ -95,7 +95,7 @@ const essayContent = [
   {
     type: "text-block",
     id: "seq4-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "participant-video",
@@ -107,20 +107,25 @@ const essayContent = [
   },
   {
     type: "scroll-overlay",
-    id: "media-15-16-17",
+    id: "media-15-16",
     authorImg1: "/images/15.jpg",
     participantImg: "/images/16.jpg",
-    authorImg2: "/images/17.jpg",
     participantCopyright: "Participant Name",
     participantCaption:
-      "[Interactive Photo Overlay - 15.jpg > 16.jpg > 17.jpg]",
+      "[Interactive Photo Overlay (Locked Background) - 15.jpg > 16.jpg > 15.jpg]",
     participantWidth: 1536,
     participantHeight: 2048,
   },
   {
+    type: "author-full-width",
+    id: "media-17",
+    src: "/images/17.jpg",
+    caption: "[Author Full Width - 17.jpg]",
+  },
+  {
     type: "text-block",
     id: "seq5-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "scroll-video-overlay",
@@ -130,12 +135,12 @@ const essayContent = [
     authorImg2: "/images/20.jpg",
     participantCopyright: "Participant Name",
     participantCaption:
-      "[Interactive Video Overlay - 18.jpg > 19.mp4 > 20.jpg]",
+      "[Interactive Video Overlay (Crossfade Background) - 18.jpg > 19.mp4 > 20.jpg]",
   },
   {
     type: "text-block",
     id: "seq6-text",
-    content: "[Text Block]",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     type: "scroll-crossfade",
@@ -241,7 +246,7 @@ export default function Home() {
               <ScrollOverlay
                 key={block.id}
                 authorImg1={block.authorImg1!}
-                authorImg2={block.authorImg2!}
+                authorImg2={block.authorImg2}
                 participantImg={block.participantImg!}
                 participantCopyright={block.participantCopyright!}
                 participantCaption={block.participantCaption!}
@@ -256,7 +261,7 @@ export default function Home() {
               <ScrollVideoOverlay
                 key={block.id}
                 authorImg1={block.authorImg1!}
-                authorImg2={block.authorImg2!}
+                authorImg2={block.authorImg2}
                 participantVideoSrc={block.participantVideoSrc!}
                 participantCopyright={block.participantCopyright!}
                 participantCaption={block.participantCaption!}
