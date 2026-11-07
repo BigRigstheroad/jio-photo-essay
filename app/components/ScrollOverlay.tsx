@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 
 interface ScrollOverlayProps {
   authorImg1: string
-  authorImg2: string
+  authorImg2?: string // Made optional
   participantImg: string
   participantCopyright: string
   participantCaption: string
@@ -56,18 +56,20 @@ export default function ScrollOverlay({
           sizes="100vw"
         />
 
-        <motion.div
-          style={{ opacity: img2Opacity }}
-          className="absolute inset-0 z-0"
-        >
-          <Image
-            src={authorImg2}
-            alt="Author's perspective background 2"
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
-        </motion.div>
+        {authorImg2 && (
+          <motion.div
+            style={{ opacity: img2Opacity }}
+            className="absolute inset-0 z-0"
+          >
+            <Image
+              src={authorImg2}
+              alt="Author's perspective background 2"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </motion.div>
+        )}
 
         <motion.div
           style={{ opacity: bgDarkenOpacity }}
