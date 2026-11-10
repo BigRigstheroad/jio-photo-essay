@@ -13,7 +13,7 @@ A continuous-scroll photographic essay built with Next.js and React.
 * **Lego-Block Architecture:** The entire site is mapped from a single, strongly-typed JSON array in `page.tsx`, allowing for effortless reordering and combination of text, images, and videos.
 * **Bilingual Support:** Includes a toggle for English and Cebuano languages for all captions and text content.
 
-## media specifications
+## Media specifications
 To maintain performance and layout integrity across all devices, media adheres to the following strict guidelines:
 * **Aspect Ratios:** 3:2 for all horizontal media, 3:4 for all vertical media. 
 * **Participant Media:** All participant photos and videos utilize a signature off-white border with copyright attributions.
