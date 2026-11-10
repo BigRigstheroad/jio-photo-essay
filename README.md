@@ -9,9 +9,9 @@ A continuous-scroll photographic essay built with Next.js and React.
 * **Media Optimization:** Next/Image, HTML5 Video with IntersectionObserver
 
 ## Features
-* **Optimized Video Rendering:** Videos utilize `preload="metadata"` and `IntersectionObserver` to trigger playback *only* when visible in the viewport, aggressively saving mobile bandwidth and ensuring instant page loads.
+* **Optimized Video Rendering:** Videos utilize `preload="metadata"` and `IntersectionObserver` to trigger playback *only* when visible in the viewport, saving mobile bandwidth and ensuring fast page loads.
 * **Lego-Block Architecture:** The entire site is mapped from a single, strongly-typed JSON array in `page.tsx`, allowing for effortless reordering and combination of text, images, and videos.
-* **Bilingual Support:** Includes a toggle for English and Cebuano reading experiences.
+* **Bilingual Support:** Includes a toggle for English and Cebuano languages for all captions and text content.
 
 ## media specifications
 To maintain performance and layout integrity across all devices, media adheres to the following strict guidelines:
