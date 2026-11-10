@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Title: TBD
 
-## Getting Started
+A continuous-scroll photographic essay built with Next.js and React.
 
-First, run the development server:
+## Tech Stack
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Media Optimization:** Next/Image, HTML5 Video with IntersectionObserver
+
+## Features
+* **Optimized Video Rendering:** Videos utilize `preload="metadata"` and `IntersectionObserver` to trigger playback *only* when visible in the viewport, aggressively saving mobile bandwidth and ensuring instant page loads.
+* **Lego-Block Architecture:** The entire site is mapped from a single, strongly-typed JSON array in `page.tsx`, allowing for effortless reordering and combination of text, images, and videos.
+* **Bilingual Support:** Includes a toggle for English and Cebuano reading experiences.
+
+## media specifications
+To maintain performance and layout integrity across all devices, media adheres to the following strict guidelines:
+* **Aspect Ratios:** 3:2 for all horizontal media, 3:4 for all vertical media. 
+* **Participant Media:** All participant photos and videos utilize a signature off-white border with copyright attributions.
+* **Video Size:** `.mp4` format, compressed to under 10MB per file.
+* **Audio:** All inline layout videos are muted by default to adhere to modern browser autoplay policies and preserve the reading experience.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
