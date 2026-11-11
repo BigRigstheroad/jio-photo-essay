@@ -59,7 +59,7 @@ export default function ScrollVideoOverlay({
           src={authorImg1}
           alt="Author's perspective background 1"
           fill
-          className="object-cover"
+          className="object-contain lg:object-cover z-0"
           sizes="100vw"
         />
 
@@ -72,7 +72,7 @@ export default function ScrollVideoOverlay({
               src={authorImg2}
               alt="Author's perspective background 2"
               fill
-              className="object-cover"
+              className="object-contain lg:object-cover z-0"
               sizes="100vw"
             />
           </motion.div>
@@ -80,16 +80,16 @@ export default function ScrollVideoOverlay({
 
         <motion.div
           style={{ opacity: bgDarkenOpacity }}
-          className="absolute inset-0 bg-black z-0"
+          className="pointer-events-none absolute inset-0 bg-black z-0"
         />
 
         <motion.div
           ref={videoCardRef}
           style={{ y: yOffset }}
-          className="relative z-10 max-w-lg w-full px-4"
+          className="relative z-10 max-w-[78vw] sm:max-w-xs md:max-w-sm w-full px-4"
         >
           <div className="bg-offwhite w-full shadow-2xl flex flex-col">
-            <div className="relative w-full aspect-3/4 bg-black">
+            <div className="relative w-full aspect-3/4 max-h-[48vh] md:max-h-[55vh] bg-black">
               <video
                 ref={videoRef}
                 src={participantVideoSrc}
@@ -101,15 +101,17 @@ export default function ScrollVideoOverlay({
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="pt-6 pb-10 px-4 w-full">
-              <p className="font-libre text-[14px] text-offblack text-center">
+            <div className="pt-4 pb-5 md:pt-5 md:pb-7 px-4 w-full">
+              <p className="font-libre text-xs md:text-[14px] text-offblack text-center">
                 {/* © */} {participantCopyright}
               </p>
             </div>
           </div>
-          <p className="caption-text text-theme-white mt-6 text-center shadow-black drop-shadow-md">
-            {participantCaption}
-          </p>
+          {participantCaption && (
+            <p className="caption-text text-theme-white mt-4 md:mt-5 text-center text-sm sm:text-base shadow-black drop-shadow-md">
+              {participantCaption}
+            </p>
+          )}
         </motion.div>
       </div>
     </div>
