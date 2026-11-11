@@ -13,75 +13,61 @@ const essayContent = [
     type: "text-block",
     id: "seq1-text",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "In the municipality of Manolo Fortich, Bukidnon, a farmer clears the land in preparation for their next planting. For the thousands of farmers in the upland province, agriculture is seen as a way of life. Some would call themselves “pobre” (which directly translates to “poor”), not as a grievance, but to take pride in the honest living the land offers. But in a sector dependent on the climate, the farmers of Manolo Fortich must live with the ongoing impacts of climate change. And a “very strong” El Niño climate pattern has placed this way of life in greater precarity.",
   },
   {
     type: "author-full-width",
     id: "media-2",
     src: "/images/2.jpg",
-    caption: "[Author Full Width - 2.jpg]",
-  },
-  {
-    type: "text-block",
-    id: "seq1-text-2",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    caption: "", // IMAGE 2 - NO CAPTION
   },
   {
     type: "author-photo",
     id: "media-3",
     src: "/images/3.jpg",
-    alt: "Author photo 3",
-    caption: "[Author Standard Photo (3:2) - 3.jpg]",
+    alt: "A Higaonon tribe farmer sows seeds",
+    caption: "A Higaonon tribe farmer sows seeds into the ground.", // IMAGE 3
     aspectRatio: "3/2",
   },
   {
     type: "participant-photo",
     id: "media-4",
     src: "/images/4.jpg",
-    alt: "Participant photo 4",
-    copyright: "Participant Name",
-    caption: "[Participant Vertical Photo (3:4) - 4.jpg]",
+    alt: "Preparing seeds in a kahon",
+    copyright: "",
+    caption:
+      '"This is our process before we plant. First, we prepare the seeds and plant them in a small place we call kahon (box) so it may grow into seedlings. We wait for them to grow. When they’re big enough, we take each seed one by one, and transfer them to another place for planting."', // IMAGE 4
     aspectRatio: "3/4",
-  },
-  {
-    type: "text-block",
-    id: "seq2-text",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-full-width",
     id: "media-5",
     src: "/images/5.jpg",
-    caption: "[Author Full Width - 5.jpg]",
+    caption:
+      "Toto Resane, a 42-year-old farmer from Lingion, Manolo Fortich, waits to cross the street with his cow to go home after its daily feeding.", // IMAGE 5
   },
   {
     type: "author-full-width",
     id: "media-6",
     src: "/images/6.jpg",
-    caption: "[Author Full Width - 6.jpg]",
+    caption:
+      "Once home, with the cow in the family backyard, Toto gets to work on feeding his pigs.", // IMAGE 6
   },
   {
     type: "participant-photo",
     id: "media-7",
     src: "/images/7.jpg",
-    alt: "Participant photo 7",
-    copyright: "Participant Name",
-    caption: "[Participant Horizontal Photo (3:2) - 7.jpg]",
+    alt: "Participant horizontal perspective",
+    copyright: "",
+    caption: "",
     aspectRatio: "3/2",
-  },
-  {
-    type: "text-block",
-    id: "seq3-text",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "author-full-width",
     id: "media-8",
     src: "/images/8.jpg",
-    caption: "[Author Full Width - 8.jpg]",
+    caption:
+      "Meanwhile, Flor Resane, Toto’s wife, sorts out the drying laundry in a clothesline just a few feet away from the pig’s den.", // IMAGE 8
   },
   {
     type: "scroll-crossfade",
@@ -94,26 +80,19 @@ const essayContent = [
       "/images/13.jpg",
     ],
     captions: [
-      "[Caption for 9.jpg]",
-      "[Caption for 10.jpg]",
-      "[Caption for 11.jpg]",
-      "[Caption for 12.jpg]",
-      "[Caption for 13.jpg]",
+      'After a day’s work, Toto gets to wind down with his daughter. Writing in her notebook, Toto\'s daughter carefully mouths the letters "A...B...C...".', // IMAGE 9
+      "A young corn seedling emerges in the field. Seemingly unexpected as the field was planted with cassava, the seedling may have been from leftover kernels from a previous crop.", // IMAGE 10
+      "While waiting for crops to grow, Toto helps his friend and fellow farmer, Ricky Cutin, build a homemade kalan de mantika (used oil stove). According to Ricky, rising LPG prices have made him seek this alternative.", // IMAGE 11
+      "Upon sharing the success of their project, Ricky and Toto were approached by neighbours asking for their own kalan de mantika.", // IMAGE 12
+      "", // IMAGE 13 - NO CAPTION
     ],
     showLabel: true,
-  },
-  {
-    type: "text-block",
-    id: "seq4-text",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     type: "participant-video",
     id: "media-14",
     src: "/videos/14.mp4",
-    copyright: "Participant Name",
-    caption: "[Participant Vertical Video (3:4) - 14.mp4]",
+    copyright: "",
     aspectRatio: "3/4",
   },
   {
@@ -121,9 +100,8 @@ const essayContent = [
     id: "media-15-16",
     authorImg1: "/images/15.jpg",
     participantImg: "/images/16.jpg",
-    participantCopyright: "Participant Name",
-    participantCaption:
-      "[Interactive Photo Overlay (Locked Background) - 15.jpg > 16.jpg > 15.jpg]",
+    participantCopyright: "",
+    participantCaption: "",
     participantWidth: 1536,
     participantHeight: 2048,
   },
@@ -131,13 +109,7 @@ const essayContent = [
     type: "author-full-width",
     id: "media-17",
     src: "/images/17.jpg",
-    caption: "[Author Full Width - 17.jpg]",
-  },
-  {
-    type: "text-block",
-    id: "seq5-text",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    caption: "",
   },
   {
     type: "scroll-video-overlay",
@@ -145,15 +117,8 @@ const essayContent = [
     authorImg1: "/images/18.jpg",
     participantVideoSrc: "/videos/19.mp4",
     authorImg2: "/images/20.jpg",
-    participantCopyright: "Participant Name",
-    participantCaption:
-      "[Interactive Video Overlay (Crossfade Background) - 18.jpg > 19.mp4 > 20.jpg]",
-  },
-  {
-    type: "text-block",
-    id: "seq6-text",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    participantCopyright: "",
+    participantCaption: "",
   },
   {
     type: "scroll-crossfade",
@@ -165,13 +130,7 @@ const essayContent = [
       "/images/24.jpg",
       "/images/25.jpg",
     ],
-    captions: [
-      "[Caption for 21.jpg]",
-      "[Caption for 22.jpg]",
-      "[Caption for 23.jpg]",
-      "[Caption for 24.jpg]",
-      "[Caption for 25.jpg]",
-    ],
+    captions: ["", "", "", "", ""],
     showLabel: false,
   },
 ]
@@ -187,7 +146,7 @@ export default function Home() {
 
       <LanguageToggle />
 
-      <article className="py-20">
+      <article className="py-5">
         {essayContent.map((block) => {
           if (block.type === "text-block") {
             return (
