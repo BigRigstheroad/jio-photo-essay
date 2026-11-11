@@ -12,7 +12,7 @@ export default function Navbar({ isFixed = false }: NavbarProps) {
       }`}
     >
       <div className="font-montserrat text-[18px] font-bold text-theme-white tracking-wide">
-        PROJECT TITLE
+        MAKIGDUYOG SA YUTA
       </div>
 
       <div className="flex gap-6">

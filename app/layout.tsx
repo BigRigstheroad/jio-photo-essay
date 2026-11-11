@@ -16,8 +16,8 @@ const libre = Libre_Caslon_Text({
 })
 
 export const metadata: Metadata = {
-  title: "Untitled Photo Essay",
-  description: "A web-based photo essay",
+  title: "MAKIGDUYOG SA YUTA",
+  description: "The Lives of Bukidnon Farmers Amid Changing Climates",
 }
 
 export default function RootLayout({

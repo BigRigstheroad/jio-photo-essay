@@ -25,7 +25,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
       className="relative h-[250vh] w-full bg-theme-black"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <Navbar isFixed={false} />
+        {/* <Navbar isFixed={false} /> */}
 
         {/* initial hero img */}
         <motion.div
