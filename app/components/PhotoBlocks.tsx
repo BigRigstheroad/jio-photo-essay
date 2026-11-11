@@ -67,7 +67,7 @@ export function ParticipantPhoto({
 
         <div className="pt-6 pb-6 px-4 w-full">
           <p className="font-libre text-[14px] text-offblack text-center">
-            © {copyright}
+            {/* © */} {copyright}
           </p>
         </div>
       </div>
