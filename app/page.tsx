@@ -181,8 +181,8 @@ export default function Home() {
     <main className="min-h-screen bg-offblack selection:bg-theme-yellow selection:text-offblack">
       <Hero
         src="/images/1.jpg"
-        title="TITLE"
-        subtitle="test demonstration"
+        title="MAKIGDUYOG SA YUTA"
+        subtitle="The Lives of Bukidnon Farmers Amid Changing Climates"
       />
 
       <LanguageToggle />
