@@ -1,8 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-};
+}
 
-export default nextConfig;
+module.exports = {
+  images: {
+    qualities: [75, 90],
+  },
+}
+
+export default nextConfig

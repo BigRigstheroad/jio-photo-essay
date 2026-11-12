@@ -22,13 +22,15 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
   return (
     <section
       ref={containerRef}
-      className="relative h-[250vh] w-full bg-theme-black"
+      className="relative h-[250vh] w-full bg-offblack"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
         {/* <Navbar isFixed={false} /> */}
 
-        <div className="relative w-full aspect-video md:h-full md:aspect-auto">
-          {/* Initial hero img */}
+        <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto">
+          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-linear-to-b from-offblack via-neutral-900 to-theme-black z-0" />
+          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-linear-to-t from-offblack via-neutral-900 to-theme-black z-0" />
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -39,7 +41,8 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
               src={src}
               alt="Hero background"
               fill
-              className="object-contain lg:object-cover z-0"
+              quality={90}
+              className="object-contain z-0"
               sizes="100vw"
               priority
             />
@@ -47,7 +50,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
 
           <motion.div
             style={{ opacity: fadeOpacity }}
-            className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10"
+            className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10"
           />
 
           <motion.h1
@@ -59,7 +62,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
 
           <motion.div
             style={{ opacity: fadeOpacity }}
-            className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-12 md:left-12 md:mt-0 md:text-left z-20 max-w-4xl"
+            className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-20 max-w-4xl"
           >
             <h1 className="hidden md:block h1-title text-theme-yellow md:text-4xl lg:text-5xl mb-2 drop-shadow-md">
               {title}
