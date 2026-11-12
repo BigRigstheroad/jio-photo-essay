@@ -52,7 +52,8 @@ export default function ScrollOverlay({
           src={authorImg1}
           alt="Author's perspective background 1"
           fill
-          className="object-contain lg:object-cover z-0"
+          quality={90}
+          className="object-contain z-0"
           sizes="100vw"
         />
 
@@ -65,7 +66,8 @@ export default function ScrollOverlay({
               src={authorImg2}
               alt="Author's perspective background 2"
               fill
-              className="object-contain lg:object-cover z-0"
+              quality={90}
+              className="object-contain z-0"
               sizes="100vw"
             />
           </motion.div>
@@ -78,15 +80,16 @@ export default function ScrollOverlay({
 
         <motion.div
           style={{ y: yOffset }}
-          className="relative z-10 max-w-[78vw] sm:max-w-xs md:max-w-sm w-full px-4"
+          className="relative z-10 w-full flex flex-col items-center px-4"
         >
-          <div className="bg-offwhite w-full shadow-2xl flex flex-col">
+          <div className="bg-offwhite w-fit max-w-[78vw] sm:max-w-xs md:max-w-sm shadow-2xl flex flex-col items-center">
             <Image
               src={participantImg}
               alt="Participant's perspective overlay"
               width={participantWidth}
               height={participantHeight}
-              className="w-full h-auto object-cover max-h-[48vh] md:max-h-[55vh]"
+              quality={90}
+              className="w-auto h-auto max-w-[78vw] sm:max-w-xs md:max-w-sm max-h-[50vh] md:max-h-[55vh] object-contain bg-black"
               sizes="(max-width: 768px) 78vw, 384px"
             />
             <div className="pt-4 pb-5 md:pt-5 md:pb-7 px-4 w-full">
@@ -96,7 +99,7 @@ export default function ScrollOverlay({
             </div>
           </div>
           {participantCaption && (
-            <p className="caption-text text-theme-white mt-4 md:mt-5 text-center text-sm sm:text-base shadow-black drop-shadow-md">
+            <p className="caption-text text-theme-white mt-4 md:mt-5 text-center max-w-lg text-sm sm:text-base shadow-black drop-shadow-md">
               {participantCaption}
             </p>
           )}

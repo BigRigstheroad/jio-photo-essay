@@ -25,10 +25,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
       className="relative h-[250vh] w-full bg-theme-black"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* <Navbar isFixed={false} /> */}
-
-        <div className="relative w-full aspect-video md:h-full md:aspect-auto">
-          {/* Initial hero img */}
+        <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -39,7 +36,8 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
               src={src}
               alt="Hero background"
               fill
-              className="object-contain lg:object-cover z-0"
+              quality={90}
+              className="object-contain z-0"
               sizes="100vw"
               priority
             />
@@ -59,7 +57,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
 
           <motion.div
             style={{ opacity: fadeOpacity }}
-            className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-12 md:left-12 md:mt-0 md:text-left z-20 max-w-4xl"
+            className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-20 max-w-4xl"
           >
             <h1 className="hidden md:block h1-title text-theme-yellow md:text-4xl lg:text-5xl mb-2 drop-shadow-md">
               {title}
