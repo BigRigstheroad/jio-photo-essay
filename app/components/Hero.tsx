@@ -22,10 +22,15 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
   return (
     <section
       ref={containerRef}
-      className="relative h-[250vh] w-full bg-theme-black"
+      className="relative h-[250vh] w-full bg-offblack"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
+        {/* <Navbar isFixed={false} /> */}
+
         <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto">
+          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-linear-to-b from-offblack via-neutral-900 to-theme-black z-0" />
+          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-linear-to-t from-offblack via-neutral-900 to-theme-black z-0" />
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -45,7 +50,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
 
           <motion.div
             style={{ opacity: fadeOpacity }}
-            className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10"
+            className="hidden md:block pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/50 to-transparent z-10"
           />
 
           <motion.h1
