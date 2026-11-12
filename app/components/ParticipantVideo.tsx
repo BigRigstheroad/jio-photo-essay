@@ -30,7 +30,7 @@ export function ParticipantVideo({
   const aspectClass = aspectRatio === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
 
   return (
-    <div className="max-w-3xl mx-auto w-full flex flex-col items-center my-20 px-4">
+    <div className="max-w-[85vw] sm:max-w-sm md:max-w-md mx-auto w-full flex flex-col items-center my-20 px-4">
       <div className="bg-offwhite w-full shadow-2xl flex flex-col">
         <div className={`relative w-full bg-black ${aspectClass}`}>
           <video

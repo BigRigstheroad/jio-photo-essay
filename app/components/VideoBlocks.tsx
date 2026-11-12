@@ -6,7 +6,7 @@ export default function VideoBlocks({
   caption?: string
 }) {
   return (
-    <figure className="max-w-3xl mx-auto w-full flex flex-col items-center my-16 px-4">
+    <figure className="max-w-[85vw] sm:max-w-sm md:max-w-md mx-auto w-full flex flex-col items-center my-16 px-4">
       <video
         src={src}
         controls
