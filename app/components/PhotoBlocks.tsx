@@ -59,10 +59,7 @@ export function ParticipantPhoto({
   alt,
   copyright,
   caption,
-  aspectRatio = "3/4",
 }: ParticipantPhotoProps) {
-  const aspectClass = aspectRatio === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
-
   return (
     <div className="max-w-[85vw] sm:max-w-sm md:max-w-md mx-auto w-full flex flex-col items-center my-14 md:my-20 px-4 select-none">
       <div className="bg-offwhite w-full shadow-2xl flex flex-col">
