@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useMemo } from "react"
 import Image from "next/image"
 import {
   motion,
@@ -29,33 +29,102 @@ export type CrossfadeStep =
       caption?: string
     }
 
-function getStepWindow(index: number, total: number) {
-  const step = 1 / (total - 1)
+interface ComputedStep {
+  step: CrossfadeStep
+  stepIndex: number
+  beatIndex: number
+  nextAuthorBeatIndex: number | null
+  hasReturnBeat: boolean
+}
+
+function buildTimeline(steps: CrossfadeStep[]) {
+  let currentBeat = 0
+
+  const computed: ComputedStep[] = steps.map((step, stepIndex) => {
+    const beatIndex = currentBeat
+    const isParticipant = step.kind !== "author"
+    const isLast = stepIndex === steps.length - 1
+    const hasReturnBeat = isParticipant && !isLast
+
+    currentBeat += hasReturnBeat ? 2 : 1
+
+    return {
+      step,
+      stepIndex,
+      beatIndex,
+      nextAuthorBeatIndex: null,
+      hasReturnBeat,
+    }
+  })
+
+  for (let i = 0; i < computed.length; i++) {
+    if (computed[i].step.kind !== "author") continue
+    for (let j = i + 1; j < computed.length; j++) {
+      if (computed[j].step.kind === "author") {
+        computed[i].nextAuthorBeatIndex = computed[j].beatIndex
+        break
+      }
+    }
+  }
+
+  return { computed, totalBeats: currentBeat }
+}
+
+function getTransition(fromBeat: number, totalBeats: number, margin: number) {
+  if (totalBeats <= 1) return { start: 0, end: 1 }
+  const unit = 1 / (totalBeats - 1)
   return {
-    fadeInStart: (index - 1) * step + step * 0.35,
-    fadeInEnd: index * step - step * 0.35,
-    fadeOutStart: index * step + step * 0.35,
-    fadeOutEnd: (index + 1) * step - step * 0.35,
+    start: fromBeat * unit + unit * margin,
+    end: (fromBeat + 1) * unit - unit * margin,
+  }
+}
+
+function getAuthorPresenceCurve(
+  beatIndex: number,
+  nextAuthorBeatIndex: number | null,
+  totalBeats: number,
+) {
+  const fadeIn =
+    beatIndex > 0 ? getTransition(beatIndex - 1, totalBeats, 0.35) : null
+  const fadeOut =
+    nextAuthorBeatIndex !== null
+      ? getTransition(nextAuthorBeatIndex - 1, totalBeats, 0.35)
+      : null
+
+  if (!fadeIn && !fadeOut) {
+    return { input: [0, 1], output: [1, 1] }
+  }
+  if (!fadeIn && fadeOut) {
+    return {
+      input: [0, fadeOut.start, fadeOut.end, 1],
+      output: [1, 1, 0, 0],
+    }
+  }
+  if (fadeIn && !fadeOut) {
+    return {
+      input: [0, fadeIn.start, fadeIn.end, 1],
+      output: [0, 0, 1, 1],
+    }
+  }
+  return {
+    input: [0, fadeIn!.start, fadeIn!.end, fadeOut!.start, fadeOut!.end, 1],
+    output: [0, 0, 1, 1, 0, 0],
   }
 }
 
 function AuthorImageLayer({
   src,
-  index,
-  total,
+  beatIndex,
+  totalBeats,
   scrollYProgress,
 }: {
   src: string
-  index: number
-  total: number
+  beatIndex: number
+  totalBeats: number
   scrollYProgress: MotionValue<number>
 }) {
-  const { fadeInStart, fadeInEnd } = getStepWindow(index, total)
-  const opacity = useTransform(
-    scrollYProgress,
-    [fadeInStart, fadeInEnd],
-    [0, 1],
-  )
+  const { start, end } = getTransition(beatIndex - 1, totalBeats, 0.35)
+  const opacity = useTransform(scrollYProgress, [start, end], [0, 1])
 
   return (
     <motion.div
@@ -64,7 +133,7 @@ function AuthorImageLayer({
     >
       <Image
         src={src}
-        alt={`Crossfade layer ${index + 1}`}
+        alt={`Crossfade layer ${beatIndex + 1}`}
         fill
         quality={90}
         className="object-contain z-0"
@@ -75,33 +144,21 @@ function AuthorImageLayer({
 }
 
 function AuthorCaptionGradient({
-  index,
-  total,
+  beatIndex,
+  nextAuthorBeatIndex,
+  totalBeats,
   scrollYProgress,
 }: {
-  index: number
-  total: number
+  beatIndex: number
+  nextAuthorBeatIndex: number | null
+  totalBeats: number
   scrollYProgress: MotionValue<number>
 }) {
-  const { fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd } = getStepWindow(
-    index,
-    total,
+  const { input, output } = getAuthorPresenceCurve(
+    beatIndex,
+    nextAuthorBeatIndex,
+    totalBeats,
   )
-
-  let input: number[]
-  let output: number[]
-
-  if (index === 0) {
-    input = [0, fadeOutStart, fadeOutEnd, 1]
-    output = [1, 1, 0, 0]
-  } else if (index === total - 1) {
-    input = [0, fadeInStart, fadeInEnd, 1]
-    output = [0, 0, 1, 1]
-  } else {
-    input = [0, fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd, 1]
-    output = [0, 0, 1, 1, 0, 0]
-  }
-
   const opacity = useTransform(scrollYProgress, input, output)
 
   return (
@@ -114,34 +171,22 @@ function AuthorCaptionGradient({
 
 function AuthorCaptionLayer({
   text,
-  index,
-  total,
+  beatIndex,
+  nextAuthorBeatIndex,
+  totalBeats,
   scrollYProgress,
 }: {
   text: string
-  index: number
-  total: number
+  beatIndex: number
+  nextAuthorBeatIndex: number | null
+  totalBeats: number
   scrollYProgress: MotionValue<number>
 }) {
-  const { fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd } = getStepWindow(
-    index,
-    total,
+  const { input, output } = getAuthorPresenceCurve(
+    beatIndex,
+    nextAuthorBeatIndex,
+    totalBeats,
   )
-
-  let input: number[]
-  let output: number[]
-
-  if (index === 0) {
-    input = [0, fadeOutStart, fadeOutEnd, 1]
-    output = [1, 1, 0, 0]
-  } else if (index === total - 1) {
-    input = [0, fadeInStart, fadeInEnd, 1]
-    output = [0, 0, 1, 1]
-  } else {
-    input = [0, fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd, 1]
-    output = [0, 0, 1, 1, 0, 0]
-  }
-
   const opacity = useTransform(scrollYProgress, input, output)
 
   return (
@@ -155,25 +200,24 @@ function AuthorCaptionLayer({
 }
 
 function OverlayDimLayer({
-  index,
-  total,
+  beatIndex,
+  hasReturnBeat,
+  totalBeats,
   scrollYProgress,
 }: {
-  index: number
-  total: number
+  beatIndex: number
+  hasReturnBeat: boolean
+  totalBeats: number
   scrollYProgress: MotionValue<number>
 }) {
-  const { fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd } = getStepWindow(
-    index,
-    total,
-  )
-  const isLast = index === total - 1
+  const enter = getTransition(beatIndex - 1, totalBeats, 0.3)
+  const exit = hasReturnBeat ? getTransition(beatIndex, totalBeats, 0.3) : null
 
-  const input = isLast
-    ? [0, fadeInStart, fadeInEnd, 1]
-    : [0, fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd, 1]
+  const input = exit
+    ? [0, enter.start, enter.end, exit.start, exit.end, 1]
+    : [0, enter.start, enter.end, 1]
 
-  const output = isLast ? [0, 0, 0.55, 0.55] : [0, 0, 0.55, 0.55, 0, 0]
+  const output = exit ? [0, 0, 0.55, 0.55, 0, 0] : [0, 0, 0.55, 0.55]
 
   const opacity = useTransform(scrollYProgress, input, output)
 
@@ -187,8 +231,9 @@ function OverlayDimLayer({
 
 function ParticipantCardLayer({
   step,
-  index,
-  total,
+  beatIndex,
+  hasReturnBeat,
+  totalBeats,
   scrollYProgress,
   isContainerInView,
 }: {
@@ -196,25 +241,23 @@ function ParticipantCardLayer({
     CrossfadeStep,
     { kind: "participant-photo" | "participant-video" }
   >
-  index: number
-  total: number
+  beatIndex: number
+  hasReturnBeat: boolean
+  totalBeats: number
   scrollYProgress: MotionValue<number>
   isContainerInView: boolean
 }) {
-  const { fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd } = getStepWindow(
-    index,
-    total,
-  )
-  const isLast = index === total - 1
+  const enter = getTransition(beatIndex - 1, totalBeats, 0.3)
+  const exit = hasReturnBeat ? getTransition(beatIndex, totalBeats, 0.3) : null
 
-  const input = isLast
-    ? [0, fadeInStart, fadeInEnd, 1]
-    : [0, fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd, 1]
+  const input = exit
+    ? [0, enter.start, enter.end, exit.start, exit.end, 1]
+    : [0, enter.start, enter.end, 1]
 
-  const opacityOutput = isLast ? [0, 0, 1, 1] : [0, 0, 1, 1, 0, 0]
-  const yOutput = isLast
-    ? ["8vh", "8vh", "0vh", "0vh"]
-    : ["8vh", "8vh", "0vh", "0vh", "-8vh", "-8vh"]
+  const opacityOutput = exit ? [0, 0, 1, 1, 0, 0] : [0, 0, 1, 1]
+  const yOutput = exit
+    ? ["100vh", "100vh", "0vh", "0vh", "-100vh", "-100vh"]
+    : ["100vh", "100vh", "0vh", "0vh"]
 
   const opacity = useTransform(scrollYProgress, input, opacityOutput)
   const y = useTransform(scrollYProgress, input, yOutput)
@@ -223,9 +266,9 @@ function ParticipantCardLayer({
   const [isActive, setIsActive] = useState(false)
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const active = isLast
-      ? latest >= fadeInStart
-      : latest >= fadeInStart && latest <= fadeOutEnd
+    const active = exit
+      ? latest >= enter.start && latest <= exit.end
+      : latest >= enter.start
     if (active !== isActive) {
       setIsActive(active)
     }
@@ -243,7 +286,7 @@ function ParticipantCardLayer({
   return (
     <motion.div
       style={{ opacity, y }}
-      className={`absolute inset-0 z-40 flex items-center justify-center px-4 ${
+      className={`absolute inset-0 z-30 flex items-center justify-center px-4 ${
         isActive ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
@@ -253,10 +296,11 @@ function ParticipantCardLayer({
             <Image
               src={step.src}
               alt={step.caption || "Participant perspective"}
-              width={2048}
-              height={2048}
+              width={0}
+              height={0}
               quality={90}
-              className="w-auto h-auto max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-black"
+              style={{ width: "auto", height: "auto" }}
+              className="max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-offblack"
               sizes="(max-width: 768px) 82vw, 448px"
             />
           ) : (
@@ -268,11 +312,11 @@ function ParticipantCardLayer({
               playsInline
               loop
               muted
-              className="w-auto h-auto max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-black"
+              className="w-auto h-auto max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-offblack"
             />
           )}
 
-          <div className="pt-4 pb-5 md:pt-5 md:pb-6 px-4 w-full">
+          <div className="pt-4 pb-5 md:pt-5 md:pb-5 px-4 w-full">
             <p className="font-libre text-xs md:text-[14px] text-offblack text-center">
               {step.copyright}
             </p>
@@ -306,7 +350,9 @@ export default function ScrollCrossfade({
     offset: ["start start", "end end"],
   })
 
-  const dynamicHeight = `${steps.length * 200}vh`
+  const { computed, totalBeats } = useMemo(() => buildTimeline(steps), [steps])
+
+  const dynamicHeight = `${totalBeats * 180}vh`
 
   return (
     <div
@@ -314,10 +360,10 @@ export default function ScrollCrossfade({
       className="relative w-full my-20 bg-offblack"
       style={{ height: dynamicHeight }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
-        <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto">
-          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-linear-to-b from-offblack via-neutral-900 to-theme-black z-0" />
-          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-linear-to-t from-offblack via-neutral-900 to-theme-black z-0" />
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-offblack">
+        <div className="relative z-10 w-full max-w-[177.78vh] aspect-video mx-auto bg-offblack">
+          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
+          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
 
           <Image
             src={steps[0].src}
@@ -328,42 +374,33 @@ export default function ScrollCrossfade({
             sizes="100vw"
           />
 
-          {steps.map((step, i) => {
-            if (i === 0 || step.kind !== "author") return null
+          {computed.map(({ step, stepIndex, beatIndex }) => {
+            if (stepIndex === 0 || step.kind !== "author") return null
             return (
               <AuthorImageLayer
-                key={`${step.src}-${i}`}
+                key={`${step.src}-${stepIndex}`}
                 src={step.src}
-                index={i}
-                total={steps.length}
+                beatIndex={beatIndex}
+                totalBeats={totalBeats}
                 scrollYProgress={scrollYProgress}
               />
             )
           })}
 
-          {steps.map((step, i) => {
-            if (step.kind !== "author" || !step.caption) return null
-            return (
-              <AuthorCaptionGradient
-                key={`grad-${i}`}
-                index={i}
-                total={steps.length}
-                scrollYProgress={scrollYProgress}
-              />
-            )
-          })}
-
-          {steps.map((step, i) => {
-            if (step.kind === "author") return null
-            return (
-              <OverlayDimLayer
-                key={`dim-${i}`}
-                index={i}
-                total={steps.length}
-                scrollYProgress={scrollYProgress}
-              />
-            )
-          })}
+          {computed.map(
+            ({ step, stepIndex, beatIndex, nextAuthorBeatIndex }) => {
+              if (step.kind !== "author" || !step.caption) return null
+              return (
+                <AuthorCaptionGradient
+                  key={`grad-${stepIndex}`}
+                  beatIndex={beatIndex}
+                  nextAuthorBeatIndex={nextAuthorBeatIndex}
+                  totalBeats={totalBeats}
+                  scrollYProgress={scrollYProgress}
+                />
+              )
+            },
+          )}
 
           {showLabel && (
             <p className="md:hidden pointer-events-none absolute bottom-full inset-x-6 mb-2.5 text-center font-montserrat text-xs font-semibold uppercase tracking-widest text-theme-yellow z-30 drop-shadow-md">
@@ -379,30 +416,47 @@ export default function ScrollCrossfade({
             )}
 
             <div className="grid items-start">
-              {steps.map((step, i) => {
-                if (step.kind !== "author" || !step.caption) return null
-                return (
-                  <AuthorCaptionLayer
-                    key={`cap-${i}`}
-                    text={step.caption}
-                    index={i}
-                    total={steps.length}
-                    scrollYProgress={scrollYProgress}
-                  />
-                )
-              })}
+              {computed.map(
+                ({ step, stepIndex, beatIndex, nextAuthorBeatIndex }) => {
+                  if (step.kind !== "author" || !step.caption) return null
+                  return (
+                    <AuthorCaptionLayer
+                      key={`cap-${stepIndex}`}
+                      text={step.caption}
+                      beatIndex={beatIndex}
+                      nextAuthorBeatIndex={nextAuthorBeatIndex}
+                      totalBeats={totalBeats}
+                      scrollYProgress={scrollYProgress}
+                    />
+                  )
+                },
+              )}
             </div>
           </div>
         </div>
 
-        {steps.map((step, i) => {
+        {computed.map(({ step, stepIndex, beatIndex, hasReturnBeat }) => {
+          if (step.kind === "author") return null
+          return (
+            <OverlayDimLayer
+              key={`dim-${stepIndex}`}
+              beatIndex={beatIndex}
+              hasReturnBeat={hasReturnBeat}
+              totalBeats={totalBeats}
+              scrollYProgress={scrollYProgress}
+            />
+          )
+        })}
+
+        {computed.map(({ step, stepIndex, beatIndex, hasReturnBeat }) => {
           if (step.kind === "author") return null
           return (
             <ParticipantCardLayer
-              key={`overlay-${step.src}-${i}`}
+              key={`overlay-${step.src}-${stepIndex}`}
               step={step}
-              index={i}
-              total={steps.length}
+              beatIndex={beatIndex}
+              hasReturnBeat={hasReturnBeat}
+              totalBeats={totalBeats}
               scrollYProgress={scrollYProgress}
               isContainerInView={isContainerInView}
             />
