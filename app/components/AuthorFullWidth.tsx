@@ -24,10 +24,10 @@ export default function AuthorFullWidth({
       ref={containerRef}
       className="relative h-[200vh] w-full my-16 md:my-20 bg-offblack select-none"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-offblack">
-        <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto bg-offblack">
-          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
-          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
+        <div className="relative w-full max-w-[177.78vh] aspect-video mx-auto">
+          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-linear-to-b from-offblack via-neutral-900 to-theme-black z-0" />
+          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-linear-to-t from-offblack via-neutral-900 to-theme-black z-0" />
 
           <Image
             src={src}
