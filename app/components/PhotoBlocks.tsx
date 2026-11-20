@@ -4,25 +4,40 @@ interface AuthorPhotoProps {
   src: string
   alt: string
   caption?: string
-  aspectRatio?: "16/9" | "3/2" | "3/4"
+  aspectRatio?: "4/3" | "16/9" | "3/2" | "3/4"
 }
 
-export function AuthorPhoto({ src, alt, caption }: AuthorPhotoProps) {
+const aspectClasses = {
+  "4/3": "aspect-[4/3]",
+  "16/9": "aspect-video",
+  "3/2": "aspect-[3/2]",
+  "3/4": "aspect-[3/4]",
+}
+
+export function AuthorPhoto({
+  src,
+  alt,
+  caption,
+  aspectRatio = "4/3",
+}: AuthorPhotoProps) {
   return (
-    <figure className="w-full bg-offblack my-16 px-4">
-      <div className="max-w-[92vw] sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full flex flex-col items-center">
-        <div className="relative w-full aspect-video bg-offblack">
+    <figure className="w-full bg-offblack my-12 md:my-16 px-0 md:px-4 select-none">
+      <div className="w-full max-w-full md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto flex flex-col items-center">
+        <div
+          className={`relative w-full ${aspectClasses[aspectRatio]} bg-offblack`}
+        >
           <Image
             src={src}
             alt={alt}
             fill
             quality={90}
+            draggable={false}
             className="object-contain"
-            sizes="(max-width: 768px) 92vw, (max-width: 1200px) 80vw, 1024px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 768px, 896px"
           />
         </div>
         {caption && (
-          <figcaption className="caption-text text-theme-white mt-4 text-center max-w-3xl text-sm sm:text-base md:text-lg">
+          <figcaption className="caption-text text-theme-white mt-3 md:mt-4 px-4 md:px-0 text-center max-w-3xl text-xs sm:text-sm md:text-lg leading-relaxed">
             {caption}
           </figcaption>
         )}
@@ -44,30 +59,34 @@ export function ParticipantPhoto({
   alt,
   copyright,
   caption,
+  aspectRatio = "3/4",
 }: ParticipantPhotoProps) {
-  return (
-    <div className="w-full flex flex-col items-center my-20 px-4">
-      <div className="bg-offwhite w-fit max-w-[88vw] sm:max-w-md md:max-w-xl shadow-2xl flex flex-col items-center">
-        <Image
-          src={src}
-          alt={alt}
-          width={0}
-          height={0}
-          quality={90}
-          style={{ width: "auto", height: "auto" }}
-          className="max-w-[88vw] sm:max-w-md md:max-w-xl max-h-[62vh] object-contain bg-offblack"
-          sizes="(max-width: 768px) 88vw, 576px"
-        />
+  const aspectClass = aspectRatio === "3/4" ? "aspect-[3/4]" : "aspect-[3/2]"
 
-        <div className="pt-4 pb-5 md:pt-6 md:pb-5 px-4 w-full">
-          <p className="font-libre text-xs md:text-[14px] text-offblack text-center">
+  return (
+    <div className="max-w-[85vw] sm:max-w-sm md:max-w-md mx-auto w-full flex flex-col items-center my-14 md:my-20 px-4 select-none">
+      <div className="bg-offwhite w-full shadow-2xl flex flex-col">
+        <div className={`relative w-full ${aspectClass}`}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            quality={90}
+            draggable={false}
+            className="object-cover"
+            sizes="(max-width: 768px) 85vw, 448px"
+          />
+        </div>
+
+        <div className="pt-3 pb-3.5 md:pt-6 md:pb-6 px-4 w-full">
+          <p className="font-libre text-[11px] md:text-[14px] text-offblack text-center">
             {copyright}
           </p>
         </div>
       </div>
 
       {caption && (
-        <p className="caption-text text-theme-white mt-4 md:mt-6 text-center max-w-2xl text-sm sm:text-base">
+        <p className="caption-text text-theme-white mt-3 md:mt-6 text-center max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed">
           {caption}
         </p>
       )}

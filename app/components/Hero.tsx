@@ -22,7 +22,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
   return (
     <section
       ref={containerRef}
-      className="relative h-[250vh] w-full bg-offblack"
+      className="relative h-[250vh] w-full bg-offblack select-none"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
         {/* <Navbar isFixed={false} /> */}
@@ -42,6 +42,7 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
               alt="Hero background"
               fill
               quality={90}
+              draggable={false}
               className="object-contain z-0"
               sizes="100vw"
               priority
@@ -55,19 +56,19 @@ export default function Hero({ src, title, subtitle }: HeroProps) {
 
           <motion.h1
             style={{ opacity: fadeOpacity }}
-            className="md:hidden pointer-events-none absolute bottom-full inset-x-6 mb-3 text-center h1-title text-theme-yellow text-2xl sm:text-3xl z-20 drop-shadow-md"
+            className="md:hidden pointer-events-none absolute bottom-full inset-x-4 mb-2.5 text-center h1-title text-theme-yellow text-lg sm:text-2xl leading-snug z-20 drop-shadow-md"
           >
             {title}
           </motion.h1>
 
           <motion.div
             style={{ opacity: fadeOpacity }}
-            className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-20 max-w-4xl"
+            className="pointer-events-none absolute top-full inset-x-4 mt-2.5 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-20 max-w-4xl"
           >
             <h1 className="hidden md:block h1-title text-theme-yellow md:text-4xl lg:text-5xl mb-2 drop-shadow-md">
               {title}
             </h1>
-            <h2 className="h2-subtitle text-theme-yellow text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-md">
+            <h2 className="h2-subtitle text-theme-yellow text-xs sm:text-sm md:text-xl lg:text-2xl leading-snug drop-shadow-md">
               {subtitle}
             </h2>
           </motion.div>
