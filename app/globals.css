@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+html,
+body {
+  touch-action: pan-x pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+img,
+video {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 @theme {
   --color-theme-black: #121212;
   --color-offblack: #222222;

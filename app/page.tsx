@@ -26,7 +26,7 @@ type EssayBlock =
       src: string
       alt: string
       caption?: string
-      aspectRatio?: "16/9" | "3/2" | "3/4"
+      aspectRatio?: "4/3" | "16/9" | "3/2" | "3/4"
     }
   | {
       type: "participant-photo"
@@ -61,7 +61,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGE 2 & 3 - SINGLE IMAGES (NO CAPTION)
+  // IMAGE 2 (16:9 FULL-WIDTH) & IMAGE 3 (4:3 AUTHOR PHOTO - NO CAPTION)
   {
     type: "author-full-width",
     id: "media-2",
@@ -69,10 +69,12 @@ const essayContent: EssayBlock[] = [
     caption: "",
   },
   {
-    type: "author-full-width",
+    type: "author-photo",
     id: "media-3",
     src: "/images/3.jpg",
+    alt: "Author photo 3",
     caption: "",
+    aspectRatio: "4/3",
   },
 
   // TEXT BLOCK
@@ -157,7 +159,7 @@ const essayContent: EssayBlock[] = [
   {
     type: "scroll-crossfade",
     id: "media-11-to-14",
-    showLabel: false,
+    showLabel: true,
     steps: [
       {
         kind: "author",
@@ -191,7 +193,7 @@ const essayContent: EssayBlock[] = [
   {
     type: "scroll-crossfade",
     id: "media-15-to-16",
-    showLabel: false,
+    showLabel: true,
     steps: [
       {
         kind: "author",
@@ -234,7 +236,7 @@ const essayContent: EssayBlock[] = [
   {
     type: "scroll-crossfade",
     id: "media-18-to-19",
-    showLabel: false,
+    showLabel: true,
     steps: [
       {
         kind: "author",
@@ -291,7 +293,7 @@ const essayContent: EssayBlock[] = [
   {
     type: "scroll-crossfade",
     id: "media-23-to-25",
-    showLabel: false,
+    showLabel: true,
     steps: [
       { kind: "author", src: "/images/23.jpg", caption: "" },
       { kind: "author", src: "/images/24.jpg", caption: "" },
@@ -310,7 +312,7 @@ const essayContent: EssayBlock[] = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-offblack selection:bg-theme-yellow selection:text-offblack">
+    <main className="min-h-screen bg-offblack select-none">
       <Hero
         src="/images/1.jpg"
         title="MAKIGDUYOG SA YUTA (Together With the Land)"
@@ -325,12 +327,12 @@ export default function Home() {
             return (
               <div
                 key={block.id}
-                className="max-w-2xl mx-auto px-4 my-16 space-y-6"
+                className="max-w-2xl mx-auto px-5 my-10 md:my-16 space-y-4 md:space-y-6"
               >
                 {block.paragraphs.map((paragraph, idx) => (
                   <p
                     key={idx}
-                    className="body-text leading-relaxed text-theme-white text-lg"
+                    className="body-text leading-relaxed text-theme-white text-sm sm:text-base md:text-lg"
                   >
                     {paragraph}
                   </p>

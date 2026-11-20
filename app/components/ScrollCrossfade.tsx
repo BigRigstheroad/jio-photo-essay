@@ -136,6 +136,7 @@ function AuthorImageLayer({
         alt={`Crossfade layer ${beatIndex + 1}`}
         fill
         quality={90}
+        draggable={false}
         className="object-contain z-0"
         sizes="100vw"
       />
@@ -192,7 +193,7 @@ function AuthorCaptionLayer({
   return (
     <motion.p
       style={{ opacity }}
-      className="font-libre text-sm sm:text-base md:text-lg lg:text-[22px] italic text-theme-white drop-shadow-md col-start-1 row-start-1 leading-relaxed"
+      className="font-libre text-xs sm:text-sm md:text-lg lg:text-[22px] italic text-theme-white drop-shadow-md col-start-1 row-start-1 leading-relaxed"
     >
       {text}
     </motion.p>
@@ -299,8 +300,9 @@ function ParticipantCardLayer({
               width={0}
               height={0}
               quality={90}
+              draggable={false}
               style={{ width: "auto", height: "auto" }}
-              className="max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-offblack"
+              className="max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[48vh] md:max-h-[55vh] object-contain bg-offblack"
               sizes="(max-width: 768px) 82vw, 448px"
             />
           ) : (
@@ -312,19 +314,19 @@ function ParticipantCardLayer({
               playsInline
               loop
               muted
-              className="w-auto h-auto max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[50vh] md:max-h-[55vh] object-contain bg-offblack"
+              className="w-auto h-auto max-w-[82vw] sm:max-w-sm md:max-w-md max-h-[48vh] md:max-h-[55vh] object-contain bg-offblack"
             />
           )}
 
-          <div className="pt-4 pb-5 md:pt-5 md:pb-5 px-4 w-full">
-            <p className="font-libre text-xs md:text-[14px] text-offblack text-center">
+          <div className="pt-3 pb-3.5 md:pt-5 md:pb-6 px-4 w-full">
+            <p className="font-libre text-[11px] md:text-[14px] text-offblack text-center">
               {step.copyright}
             </p>
           </div>
         </div>
 
         {step.caption && (
-          <p className="caption-text text-theme-white mt-4 md:mt-5 text-center max-w-xl text-sm sm:text-base shadow-black drop-shadow-md">
+          <p className="caption-text text-theme-white mt-3 md:mt-5 text-center max-w-xl text-xs sm:text-sm md:text-base leading-relaxed shadow-black drop-shadow-md">
             {step.caption}
           </p>
         )}
@@ -357,19 +359,20 @@ export default function ScrollCrossfade({
   return (
     <div
       ref={containerRef}
-      className="relative w-full my-20 bg-offblack"
+      className="relative w-full my-16 md:my-20 bg-offblack select-none"
       style={{ height: dynamicHeight }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-offblack">
-        <div className="relative z-10 w-full max-w-[177.78vh] aspect-video mx-auto bg-offblack">
-          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
-          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-offblack z-0" />
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-linear-to-b from-offblack via-theme-black to-offblack">
+        <div className="relative z-10 w-full max-w-[177.78vh] aspect-video mx-auto">
+          <div className="pointer-events-none absolute bottom-full inset-x-[-50vw] h-[50vh] bg-linear-to-b from-offblack via-neutral-900 to-theme-black z-0" />
+          <div className="pointer-events-none absolute top-full inset-x-[-50vw] h-[50vh] bg-linear-to-t from-offblack via-neutral-900 to-theme-black z-0" />
 
           <Image
             src={steps[0].src}
             alt="Crossfade base layer"
             fill
             quality={90}
+            draggable={false}
             className="object-contain z-0"
             sizes="100vw"
           />
@@ -403,12 +406,12 @@ export default function ScrollCrossfade({
           )}
 
           {showLabel && (
-            <p className="md:hidden pointer-events-none absolute bottom-full inset-x-6 mb-2.5 text-center font-montserrat text-xs font-semibold uppercase tracking-widest text-theme-yellow z-30 drop-shadow-md">
+            <p className="md:hidden pointer-events-none absolute bottom-full inset-x-4 mb-2 text-center font-montserrat text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-theme-yellow z-30 drop-shadow-md">
               Interactive - scrollable
             </p>
           )}
 
-          <div className="pointer-events-none absolute top-full inset-x-6 mt-3 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-30 max-w-3xl">
+          <div className="pointer-events-none absolute top-full inset-x-4 mt-2.5 text-center md:top-auto md:right-auto md:bottom-10 md:left-10 md:mt-0 md:text-left z-30 max-w-3xl">
             {showLabel && (
               <p className="hidden md:block font-montserrat text-xs md:text-sm font-semibold uppercase tracking-widest text-theme-yellow mb-1.5 drop-shadow-md">
                 Interactive - scrollable
