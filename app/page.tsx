@@ -69,7 +69,7 @@ const essayContent: EssayBlock[] = [
     caption: "",
   },
   {
-    type: "author-photo",
+    type: "author-full-width",
     id: "media-3",
     src: "/images/3.jpg",
     alt: "Author photo 3",
