@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Montserrat, Libre_Caslon_Text } from "next/font/google"
+import ContentProtection from "@/app/components/ContentProtection"
 import "./globals.css"
 
 const montserrat = Montserrat({
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} ${libre.variable} antialiased`}>
+        <ContentProtection />
         {children}
       </body>
     </html>
