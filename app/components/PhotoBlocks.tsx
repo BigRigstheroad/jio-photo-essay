@@ -9,22 +9,24 @@ interface AuthorPhotoProps {
 
 export function AuthorPhoto({ src, alt, caption }: AuthorPhotoProps) {
   return (
-    <figure className="max-w-[92vw] sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full flex flex-col items-center my-16 px-4">
-      <div className="relative w-full aspect-video bg-theme-black">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          quality={90}
-          className="object-contain"
-          sizes="(max-width: 768px) 92vw, (max-width: 1200px) 80vw, 1024px"
-        />
+    <figure className="w-full bg-offblack my-16 px-4">
+      <div className="max-w-[92vw] sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full flex flex-col items-center">
+        <div className="relative w-full aspect-video bg-offblack">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            quality={90}
+            className="object-contain"
+            sizes="(max-width: 768px) 92vw, (max-width: 1200px) 80vw, 1024px"
+          />
+        </div>
+        {caption && (
+          <figcaption className="caption-text text-theme-white mt-4 text-center max-w-3xl text-sm sm:text-base md:text-lg">
+            {caption}
+          </figcaption>
+        )}
       </div>
-      {caption && (
-        <figcaption className="caption-text text-theme-white mt-4 text-center max-w-3xl text-sm sm:text-base md:text-lg">
-          {caption}
-        </figcaption>
-      )}
     </figure>
   )
 }
@@ -49,16 +51,17 @@ export function ParticipantPhoto({
         <Image
           src={src}
           alt={alt}
-          width={2048}
-          height={2048}
+          width={0}
+          height={0}
           quality={90}
-          className="w-auto h-auto max-w-[88vw] sm:max-w-md md:max-w-xl max-h-[62vh] object-contain bg-black"
+          style={{ width: "auto", height: "auto" }}
+          className="max-w-[88vw] sm:max-w-md md:max-w-xl max-h-[62vh] object-contain bg-offblack"
           sizes="(max-width: 768px) 88vw, 576px"
         />
 
-        <div className="pt-4 pb-5 md:pt-6 md:pb-6 px-4 w-full">
+        <div className="pt-4 pb-5 md:pt-6 md:pb-5 px-4 w-full">
           <p className="font-libre text-xs md:text-[14px] text-offblack text-center">
-            {/* © */} {copyright}
+            {copyright}
           </p>
         </div>
       </div>
