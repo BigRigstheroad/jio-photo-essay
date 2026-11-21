@@ -330,8 +330,8 @@ const essayContent: EssayBlock[] = [
         src: "/videos/19.mp4",
         copyright: "© Flor 2026 | ‘Makigduyog sa Yuta’",
         caption: {
-          EN: "Corn harvesting.",
-          CEB: "Pagharvest ng mais.",
+          EN: "“Corn harvesting.”",
+          CEB: "“Pagharvest ng mais.”",
         },
       },
     ],
