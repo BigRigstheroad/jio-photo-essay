@@ -51,6 +51,7 @@ type EssayBlock =
     }
 
 const essayContent: EssayBlock[] = [
+  // intro text
   {
     type: "text-block",
     id: "intro-text",
@@ -60,22 +61,25 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
+  // img 2
   {
     type: "author-full-width",
     id: "media-2",
     src: "/images/2.jpg",
     caption: "",
   },
+
+  // img 3
   {
     type: "author-photo",
     id: "media-3",
     src: "/images/3.jpg",
-    alt: "Author photo 3",
+    alt: "",
     caption: "",
     aspectRatio: "4/3",
   },
 
-  // TEXT BLOCK
+  // text block
   {
     type: "text-block",
     id: "memory-text",
@@ -84,19 +88,18 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGE 4 - PARTICIPANT SINGLE IMAGE
-  // Original text: Ito ang proseso namin bago magtanim. Una inihahanda muna ang mga buto at itinatanim ang mga ito sa isang maliit na lugar na tinatawag naming kahon upang tumubo ang mga punla. Hinihintay muna namin na lumaki at kapag sapat na ang laki at handa ng ilipat isa-isa naming binubunot at saka inililipat at itinatanim.
+  // img 4
   {
     type: "participant-photo",
     id: "media-4",
     src: "/images/4.jpg",
-    alt: "Seedlings prepared in a kahon",
+    alt: "",
     copyright: "© Anonymous 2025 | ‘Makigduyog sa Yuta’",
     caption:
       "“This is our process before we plant. First, we prepare the seeds and plant them in a small place we call kahon (box) so it may grow into seedlings. We wait for them to grow. When they’re big enough, we take each seed one by one, and transfer them to another place for planting.” - Narlyn Sumuhoy",
   },
 
-  // INTERACTIVE CROSSFADING SEQUENCE 1 (1A - 1E: Images 5, 6, 7 [overlay], 8, 9)
+  // crossfade sequence: img 5, 6, 7, 8, 9
   {
     type: "scroll-crossfade",
     id: "media-5-to-9",
@@ -135,7 +138,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGE 10 - SINGLE IMAGE
+  // img 10
   {
     type: "author-full-width",
     id: "media-10",
@@ -143,7 +146,7 @@ const essayContent: EssayBlock[] = [
     caption: "A leftover corn seedling emerges from soil planted with cassava.",
   },
 
-  // BODY PARAGRAPH 1
+  // text block: body paragraph 1
   {
     type: "text-block",
     id: "body-text-1",
@@ -152,8 +155,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // INTERACTIVE CROSSFADING SEQUENCE 2 (2A - 2D: Images 11, 12, 13, 14 [video overlay, stays])
-  // Original text (14): “Yung kanin, mga sampung minuto lang luto na. Matagal ko na rin ‘to balak gawin kasi ang mahal na ng gasul. Nagawa rin. Magkano lang yung used oil sa mga talyer.”
+  // crossfade sequence: img 11, 12, 13, 14
   {
     type: "scroll-crossfade",
     id: "media-11-to-14",
@@ -186,8 +188,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // INTERACTIVE CROSSFADING SEQUENCE 3 (3A - 3B: Image 15 -> 16 [photo overlay, stays])
-  // Original text (16): “Yellow corn, kunting kain mulang, sulit kana sa busog”
+  // crossfade sequence: img 15, 16
   {
     type: "scroll-crossfade",
     id: "media-15-to-16",
@@ -208,7 +209,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // BODY PARAGRAPH 2
+  // text block: body paragraph 2
   {
     type: "text-block",
     id: "body-text-2",
@@ -221,7 +222,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGE 17 - SINGLE IMAGE
+  // img 17
   {
     type: "author-full-width",
     id: "media-17",
@@ -230,7 +231,7 @@ const essayContent: EssayBlock[] = [
       "Dagunlay also notes that despite Manolo Fortich being an upland municipality, the heat can still get extreme.",
   },
 
-  // IMAGE 18 & 19 - OVERLAY IMAGE 18 WITH PARTICIPANT VIDEO 19
+  // overlay sequence: img 18, 19
   {
     type: "scroll-crossfade",
     id: "media-18-to-19",
@@ -250,7 +251,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGES 20, 21, 22 - SINGLE IMAGES
+  // img 20
   {
     type: "author-full-width",
     id: "media-20",
@@ -258,13 +259,26 @@ const essayContent: EssayBlock[] = [
     caption:
       "Even during the dry season, sudden downpour can interrupt harvest days.",
   },
+
+  // text block: body paragraph 3
+  {
+    type: "text-block",
+    id: "body-text-3",
+    paragraphs: [
+      "Other farmers skip farming during the day completely.",
+      "Lumintad works with her son, Ren, around 6 in the evening. She says that it gets really hot when working during the midday, so working at night or early morning, around 4:00AM, lets them avoid the heat. Additionally, working at night or early morning is what her schedule often permits.",
+    ],
+  },
+
+  // img 21
   {
     type: "author-full-width",
     id: "media-21",
     src: "/images/21.jpg",
-    caption:
-      "Lumintad works with her son, Ren, around 6 in the evening. She says that it gets really hot when working during the midday, so working at night or early morning, around 4:00AM, lets them avoid the heat. Additionally, working at night or early morning is what her schedule often permits.",
+    caption: "",
   },
+
+  // img 22
   {
     type: "author-full-width",
     id: "media-22",
@@ -272,10 +286,10 @@ const essayContent: EssayBlock[] = [
     caption: "A portrait of Linda Lumintad in Lingion, Manolo Fortich.",
   },
 
-  // BODY PARAGRAPH 3
+  // text block: body paragraph 4
   {
     type: "text-block",
-    id: "body-text-3",
+    id: "body-text-4",
     paragraphs: [
       "Lumintad likens planting to making a shot; “sometimes you miss, other times you score.”",
       "Current climate conditions, along with El Niño, worsens the odds of farmers.",
@@ -287,7 +301,7 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // INTERACTIVE CROSSFADE (Images 23, 24, 25 - NO CAPTION)
+  // crossfade sequence: img 23, 24, 25
   {
     type: "scroll-crossfade",
     id: "media-23-to-25",
@@ -299,7 +313,16 @@ const essayContent: EssayBlock[] = [
     ],
   },
 
-  // IMAGE 26 - SINGLE IMAGE (NO CAPTION)
+  // text block: ending line
+  {
+    type: "text-block",
+    id: "body-text-5",
+    paragraphs: [
+      "The Super El Niño cycle is expected to persist into the first half of 2027.",
+    ],
+  },
+
+  // img 26
   {
     type: "author-full-width",
     id: "media-26",
@@ -313,7 +336,7 @@ export default function Home() {
     <main className="min-h-screen bg-offblack select-none">
       <Hero
         src="/images/1.jpg"
-        title="MAKIGDUYOG SA YUTA (Together With the Land)"
+        title="MAKIGDUYOG SA YUTA"
         subtitle="The Lives of Bukidnon Farmers Amid Changing Climates"
       />
 
