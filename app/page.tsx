@@ -342,7 +342,7 @@ export default function Home() {
 
       <LanguageToggle />
 
-      <article className="py-20">
+      <article className="">
         {essayContent.map((block) => {
           if (block.type === "text-block") {
             return (
