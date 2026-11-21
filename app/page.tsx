@@ -51,17 +51,15 @@ type EssayBlock =
     }
 
 const essayContent: EssayBlock[] = [
-  // INTRO PARAGRAPH
   {
     type: "text-block",
     id: "intro-text",
     paragraphs: [
       "For the thousands of farmers in the upland province of Manolo Fortich, Bukidnon, agriculture is a way of life. Some would call themselves “pobre” (which directly translates to “poor”), not as a grievance, but to take pride in the honest living the land offers. But in a sector dependent on the climate, the farmers of Manolo Fortich must live with the ongoing impacts of climate change. And a “very strong” El Niño climate pattern has placed this way of life in greater precarity.",
-      "In April 2026, the Philippine Atmospheric Geophysical and Astronomical Services Administration (PAGASA) issued an El Niño Alert, warning that “an increased possibility of drier-than-usual conditions” would emerge in the midyear. And in September, PAGASA declared that the phenomenon is expected to develop into a “very strong”, or as some would even call it, “Super” El Niño in the last months of 2026, persisting into the first half of 2027.",
+      "In April 2026, the Philippine Atmospheric Geophysical and Astronomical Services Administration (PAGASA) issued an El Niño Alert, warning that “an increased possibility of drier-than-usual conditions” would emerge in the midyear. And in September, PAGASA declared that the phenomenon is expected to develop into a “very strong”, or as some would even call it, “Super” El Niño in the last months of 2026.",
     ],
   },
 
-  // IMAGE 2 (16:9 FULL-WIDTH) & IMAGE 3 (4:3 AUTHOR PHOTO - NO CAPTION)
   {
     type: "author-full-width",
     id: "media-2",
