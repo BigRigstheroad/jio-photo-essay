@@ -18,7 +18,7 @@ export default function LanguageToggle() {
           onClick={() => setActiveLang("CEB")}
           className={`hover:text-theme-yellow transition-colors cursor-pointer ${activeLang === "CEB" ? "text-theme-yellow" : ""}`}
         >
-          Basaha kini nga artikulo sa Cebuano
+          Basaha kini nga artikulo sa Bisaya
         </button>
       </div>
     </div>
