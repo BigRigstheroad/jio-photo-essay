@@ -2,7 +2,7 @@
 import { useRef } from "react"
 import Image from "next/image"
 import { useScroll } from "framer-motion"
-// dummy comment
+// dummy comment z
 interface AuthorFullWidthProps {
   src: string
   caption: string
